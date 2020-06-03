@@ -1,11 +1,20 @@
 'use strict';
 
-var TYPE = ['palace', 'flat', 'house', 'bungalo'];
-var CHECK = ['12:00', '13:00', '14:00'];
+var TYPES = ['palace', 'flat', 'house', 'bungalo'];
+var TIMES = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var PIN_WIDTH = 50;
 var PIN_HEIGHT = 70;
-var mock = [];
+var COUNT_ADS = 8;
+var PRICE_MIN = 1000;
+var PRICE_MAX = 100000;
+var ROOMS_MIN = 1;
+var ROOMS_MAX = 3;
+var GUESTS_MIN = 1;
+var GUESTS_MAX = 3;
+var HEIGHT_Y_MIN = 130;
+var HEIGHT_Y_MAX = 630;
+var mocks = [];
 
 var getRandomIntInclusive = function (min, max) {
   min = Math.ceil(min);
@@ -14,7 +23,7 @@ var getRandomIntInclusive = function (min, max) {
 };
 
 var creationMock = function (arr) {
-  for (var i = 0; i < 8; i++) {
+  for (var i = 0; i < COUNT_ADS; i++) {
     arr.push(
         {
           'author': {
@@ -22,20 +31,20 @@ var creationMock = function (arr) {
           },
           'offer': {
             'title': 'Заголовок объявления',
-            'address': getRandomIntInclusive(0, map.offsetWidth) + ', ' + getRandomIntInclusive(130, 630),
-            'price': getRandomIntInclusive(10000, 80000),
-            'type': TYPE[getRandomIntInclusive(0, TYPE.length - 1)],
-            'rooms': getRandomIntInclusive(1, 3),
-            'guests': getRandomIntInclusive(1, 3),
-            'checkin': CHECK[getRandomIntInclusive(0, CHECK.length - 1)],
-            'checkout': CHECK[getRandomIntInclusive(0, CHECK.length - 1)],
+            'address': getRandomIntInclusive(0, map.offsetWidth) + ', ' + getRandomIntInclusive(HEIGHT_Y_MIN, HEIGHT_Y_MAX),
+            'price': getRandomIntInclusive(PRICE_MIN, PRICE_MAX),
+            'type': TYPES[getRandomIntInclusive(0, TYPES.length - 1)],
+            'rooms': getRandomIntInclusive(ROOMS_MIN, ROOMS_MAX),
+            'guests': getRandomIntInclusive(GUESTS_MIN, GUESTS_MAX),
+            'checkin': TIMES[getRandomIntInclusive(0, TIMES.length - 1)],
+            'checkout': TIMES[getRandomIntInclusive(0, TIMES.length - 1)],
             'features': FEATURES,
             'description': 'Описание объявления',
             'photos': ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg']
           },
           'location': {
             'x': getRandomIntInclusive(0, map.offsetWidth) + PIN_WIDTH,
-            'y': getRandomIntInclusive(130, 630) + PIN_HEIGHT
+            'y': getRandomIntInclusive(HEIGHT_Y_MIN, HEIGHT_Y_MAX) + PIN_HEIGHT
           }
         }
     );
@@ -45,7 +54,7 @@ var creationMock = function (arr) {
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
 
-creationMock(mock);
+creationMock(mocks);
 
 var pins = document.querySelector('.map__pins');
 var pinTemplate = document.querySelector('#pin').content.querySelector('button');
@@ -63,8 +72,8 @@ var renderPin = function (item) {
   return pin;
 };
 
-for (var i = 0; i < mock.length; i++) {
-  pinsFragment.appendChild(renderPin(mock[i]));
+for (var i = 0; i < mocks.length; i++) {
+  pinsFragment.appendChild(renderPin(mocks[i]));
 }
 
 pins.appendChild(pinsFragment);
