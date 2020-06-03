@@ -1,12 +1,7 @@
 language: node_js
 
 node_js:
-<<<<<<< HEAD
-  - "8.9"
-  - "lts/*"
-=======
   - 12
->>>>>>> dccbeef00dae019ea78e37d38717aaaa03fc7325
 
 notifications:
   email: false
