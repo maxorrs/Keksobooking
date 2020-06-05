@@ -14,6 +14,8 @@ var GUESTS_MIN = 1;
 var GUESTS_MAX = 3;
 var HEIGHT_Y_MIN = 130;
 var HEIGHT_Y_MAX = 630;
+var PHOTO_AD_WIDTH = 45;
+var PHOTO_AD_HEIGHT = 40;
 var mocks = [];
 
 var getRandomIntInclusive = function (min, max) {
@@ -89,32 +91,51 @@ var checkingPresenceInCard = function (selector, itemForCheck) {
   }
 };
 
+var getValueTypeOffer = function (typeOffer) {
+  var typeInRussian;
+  switch (typeOffer) {
+    case 'palace':
+      typeInRussian = 'Дворец';
+      break;
+    case 'flat':
+      typeInRussian = 'Квартира';
+      break;
+    case 'house':
+      typeInRussian = 'Дом';
+      break;
+    case 'bungalo':
+      typeInRussian = 'Бунгало';
+      break;
+    default:
+      typeInRussian = '';
+  }
+
+  return typeInRussian;
+};
+
+var renderPhotos = function (item) {
+  var photos = card.querySelector('.popup__photos');
+  photos.innerHTML = '';
+
+  for (var k = 0; k < item.offer.photos.length; k++) {
+    var photo = document.createElement('img');
+    photo.className = 'popup__photo';
+    photo.src = item.offer.photos[k];
+    photo.width = PHOTO_AD_WIDTH;
+    photo.height = PHOTO_AD_HEIGHT;
+    photo.alt = item.offer.title;
+    photos.appendChild(photo);
+  }
+};
+
 var renderCard = function (item) {
   var messageRoom = item.offer.rooms === 1 ? ' комната для ' : ' комнаты для ';
   var messageGuest = item.offer.guests === 1 ? ' гостя' : ' гостей';
-  var type = item.offer.type;
-
-  switch (type) {
-    case 'palace':
-      type = 'Дворец';
-      break;
-    case 'flat':
-      type = 'Квартира';
-      break;
-    case 'house':
-      type = 'Дом';
-      break;
-    case 'bungalo':
-      type = 'Бунгало';
-      break;
-    default:
-      type = '';
-  }
 
   checkingPresenceInCard('.popup__title', item.offer.title);
   checkingPresenceInCard('.popup__text--address', item.offer.address);
   checkingPresenceInCard('.popup__text--price', item.offer.price + '₽/ночь');
-  checkingPresenceInCard('.popup__type', type);
+  checkingPresenceInCard('.popup__type', getValueTypeOffer(item.offer.type));
 
   if (item.offer.rooms || item.offer.guests) {
     card.querySelector('.popup__text--capacity').textContent = item.offer.rooms + messageRoom + item.offer.guests + messageGuest;
@@ -139,18 +160,7 @@ var renderCard = function (item) {
 
   card.querySelector('.popup__description').textContent = item.offer.description;
 
-  var photos = card.querySelector('.popup__photos');
-  photos.innerHTML = '';
-
-  for (var k = 0; k < item.offer.photos.length; k++) {
-    var photo = document.createElement('img');
-    photo.className = 'popup__photo';
-    photo.src = item.offer.photos[k];
-    photo.width = 45;
-    photo.height = 40;
-    photo.alt = item.offer.title;
-    photos.appendChild(photo);
-  }
+  renderPhotos(item);
 
   card.querySelector('.popup__avatar').src = item.author.avatar;
 
