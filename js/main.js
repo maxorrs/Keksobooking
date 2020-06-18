@@ -13,10 +13,13 @@ var PRICE_MIN = 1000;
 var PRICE_MAX = 1000000;
 var ROOMS_MIN = 1;
 var ROOMS_MAX = 3;
+var ROOMS_COUNT_NOT_GUESTS = 100;
 var GUESTS_MIN = 1;
 var GUESTS_MAX = 3;
 var HEIGHT_Y_MIN = 130;
 var HEIGHT_Y_MAX = 630;
+var KEY_CODE_ENTER = 13;
+var LEFT_BUTTON_MOUSE = 0;
 // var PHOTO_AD_WIDTH = 45;
 // var PHOTO_AD_HEIGHT = 40;
 // var DECLENCIONS_ROOMS = ['комната', 'комнаты', 'комнат'];
@@ -203,13 +206,13 @@ var activeModeOn = function () {
 };
 
 pinMain.addEventListener('mousedown', function (evt) {
-  if (evt.button === 0) {
+  if (evt.button === LEFT_BUTTON_MOUSE) {
     activeModeOn();
   }
 });
 
 pinMain.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 13) {
+  if (evt.keyCode === KEY_CODE_ENTER) {
     activeModeOn();
   }
 });
@@ -217,20 +220,69 @@ pinMain.addEventListener('keydown', function (evt) {
 var roomNumberInput = document.querySelector('#room_number');
 var capacityInput = document.querySelector('#capacity');
 
-var checkHandler = function () {
-  if (capacityInput.value > roomNumberInput.value || capacityInput.value === 0 && roomNumberInput.value >= 1 && roomNumberInput.value <= 3) {
-    capacityInput.setCustomValidity('1 комната рассчитана на 1 гостя');
-  } else if (capacityInput.value === 0 && roomNumberInput.value === 100) {
-    capacityInput.setCustomValidity('');
-  } else if (roomNumberInput.value === 100 && capacityInput.value > 0) {
-    capacityInput.setCustomValidity('1 комната рассчитана на 1 гостя');
-  } else if (capacityInput.value < roomNumberInput.value || capacityInput.value && roomNumberInput.value === 100) {
-    capacityInput.setCustomValidity('');
-  } else {
-    capacityInput.setCustomValidity('');
+var getValidityMessage = function () {
+  var validityMessage;
+  var roomValue = +roomNumberInput.value;
+  var capacityValue = +capacityInput.value;
+
+  switch (true) {
+    case roomValue === ROOMS_COUNT_NOT_GUESTS && capacityValue >= ROOMS_MIN && capacityValue <= ROOMS_MAX:
+    case roomValue < capacityValue:
+    case roomValue >= ROOMS_MIN && roomValue <= ROOMS_MAX && capacityValue === 0:
+      validityMessage = '1 комната рассчитана на 1 гостя';
+      break;
+    default:
+      validityMessage = '';
+      break;
+  }
+
+  return validityMessage;
+};
+
+var setDefaultValueSelect = function () {
+  for (var x = 0; x < capacityInput.children.length; x++) {
+    capacityInput.children[x].disabled = true;
+  }
+  capacityInput.children[2].disabled = false;
+  capacityInput.children[2].selected = true;
+};
+
+var syncSelects = function () {
+  for (var z = 0; z < capacityInput.children.length; z++) {
+    switch (roomNumberInput.value) {
+      case '1':
+        capacityInput.children[z].disabled = true;
+        capacityInput.children[2].disabled = false;
+        capacityInput.children[2].selected = true;
+        break;
+      case '2':
+        capacityInput.children[z].disabled = true;
+        capacityInput.children[1].disabled = false;
+        capacityInput.children[2].disabled = false;
+        capacityInput.children[2].selected = true;
+        break;
+      case '3':
+        capacityInput.children[z].disabled = true;
+        capacityInput.children[2].disabled = false;
+        capacityInput.children[1].disabled = false;
+        capacityInput.children[0].disabled = false;
+        capacityInput.children[2].selected = true;
+        break;
+      case '100':
+        capacityInput.children[z].disabled = true;
+        capacityInput.children[3].disabled = false;
+        capacityInput.children[3].selected = true;
+        break;
+      default:
+        break;
+    }
   }
 };
 
-capacityInput.addEventListener('change', checkHandler);
+setDefaultValueSelect();
 
-roomNumberInput.addEventListener('change', checkHandler);
+capacityInput.addEventListener('change', function () {
+  capacityInput.setCustomValidity(getValidityMessage());
+});
+
+roomNumberInput.addEventListener('change', syncSelects);
