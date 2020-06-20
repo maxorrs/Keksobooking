@@ -24,6 +24,11 @@ var LEFT_BUTTON_MOUSE = 0;
 var PHOTO_AD_WIDTH = 45;
 var PHOTO_AD_HEIGHT = 40;
 var DECLENCIONS_ROOMS = ['комната', 'комнаты', 'комнат'];
+var PRICE_DEFAULT = 1000;
+var PRICE_FOR_BUNGALO = 0;
+var PRICE_FOR_FLAT = 1000;
+var PRICE_FOR_HOUSE = 5000;
+var PRICE_FOR_PALACE = 10000;
 var mocks = [];
 var map = document.querySelector('.map');
 
@@ -286,32 +291,41 @@ for (var v = 0; v < mocks.length; v++) {
   pinsFragment.children[v].dataset.id = v;
 }
 
-var openAdCard = function (evt) {
-  var pinSelected = evt.target.closest('.map__pin:not(.map__pin--main)');
-  if (pinSelected) {
-    pins.after(renderCard(mocks[pinSelected.dataset.id]));
-  }
-};
 
 var closeAdCard = function () {
   if (document.querySelector('.map__card')) {
     document.querySelector('.map__card').remove();
+    document.removeEventListener('keydown', onCardEscPress);
+    if (document.querySelector('.popup__close')) {
+      document.querySelector('.popup__close').removeEventListener('click', onCardCloseButton);
+    }
   }
 };
 
+var onCardEscPress = function (evt) {
+  if (evt.keyCode === KEY_CODE_ESC) {
+    evt.preventDefault();
+    closeAdCard();
+  }
+};
+
+
+var onCardCloseButton = function () {
+  closeAdCard();
+};
+
+var openAdCard = function (evt) {
+  var pinSelected = evt.target.closest('.map__pin:not(.map__pin--main)');
+  if (pinSelected) {
+    pins.after(renderCard(mocks[pinSelected.dataset.id]));
+    document.addEventListener('keydown', onCardEscPress);
+    document.querySelector('.popup__close').addEventListener('click', onCardCloseButton);
+  }
+};
+
+
 pins.addEventListener('click', function (evt) {
   openAdCard(evt);
-
-  document.addEventListener('keydown', function (evnt) {
-    if (evnt.keyCode === KEY_CODE_ESC) {
-      closeAdCard();
-    }
-  });
-  if (document.querySelector('.popup__close')) {
-    document.querySelector('.popup__close').addEventListener('click', function () {
-      document.querySelector('.map__card').remove();
-    });
-  }
 });
 
 var timeIn = document.querySelector('#timein');
@@ -350,16 +364,19 @@ timeIn.addEventListener('change', function () {
 });
 
 var priceInput = document.querySelector('#price');
+priceInput.value = PRICE_DEFAULT;
 
-priceInput.addEventListener('input', function () {
+var checkValididityPriceInput = function () {
   if (priceInput.value.match(/\D/)) {
     priceInput.setCustomValidity('Только цифры');
     priceInput.reportValidity();
   } else {
     priceInput.setCustomValidity('');
   }
-  priceInput.value = priceInput.value.replace(/\D/, '');
-});
+};
+
+priceInput.addEventListener('input', checkValididityPriceInput);
+
 
 var typeHousingInput = document.querySelector('#type');
 
@@ -368,16 +385,16 @@ var getValuePlaceholderPrice = function () {
 
   switch (typeHousingInput.value) {
     case 'bungalo':
-      placeholderPrice = 0;
+      placeholderPrice = PRICE_FOR_BUNGALO;
       break;
     case 'flat':
-      placeholderPrice = 1000;
+      placeholderPrice = PRICE_FOR_FLAT;
       break;
     case 'house':
-      placeholderPrice = 5000;
+      placeholderPrice = PRICE_FOR_HOUSE;
       break;
     case 'palace':
-      placeholderPrice = 10000;
+      placeholderPrice = PRICE_FOR_PALACE;
       break;
     default:
       break;
@@ -399,7 +416,4 @@ var checkMinPricePerNight = function () {
   }
 };
 
-priceInput.addEventListener('change', function () {
-  checkMinPricePerNight();
-});
-
+priceInput.addEventListener('change', checkMinPricePerNight);
