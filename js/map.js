@@ -3,11 +3,10 @@
 (function () {
 
   var activeModeOn = function () {
-    window.consts.MAP.classList.remove('map--faded');
+    window.utilConsts.MAP.classList.remove('map--faded');
     window.form.adForm.classList.remove('ad-form--disabled');
 
     window.pin.pins.appendChild(window.pin.pinsFragment);
-    window.consts.addressInput.value = Math.floor(window.pin.pinMain.offsetLeft + window.consts.MAIN_PIN_WIDTH / 2) + ', ' + Math.floor(window.pin.pinMain.offsetTop + window.consts.MAIN_PIN_HEIGHT);
   };
 
   window.pin.pins.addEventListener('click', function (evt) {
@@ -15,13 +14,13 @@
   });
 
   window.pin.pinMain.addEventListener('mousedown', function (evt) {
-    if (evt.button === window.consts.LEFT_BUTTON_MOUSE) {
+    if (evt.button === window.utilConsts.LEFT_BUTTON_MOUSE) {
       activeModeOn();
     }
   });
 
   window.pin.pinMain.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.consts.KEY_CODE_ENTER) {
+    if (evt.keyCode === window.utilConsts.KEY_CODE_ENTER) {
       activeModeOn();
     }
   });
@@ -37,7 +36,7 @@
   };
 
   var onCardEscPress = function (evt) {
-    if (evt.keyCode === window.consts.KEY_CODE_ESC) {
+    if (evt.keyCode === window.utilConsts.KEY_CODE_ESC) {
       evt.preventDefault();
       closeAdCard();
     }

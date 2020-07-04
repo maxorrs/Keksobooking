@@ -2,7 +2,6 @@
 
 (function () {
   var adForm = document.querySelector('.ad-form');
-  // adForm.classList.remove('ad-form--disabled');
   var fieldsets = adForm.querySelectorAll('fieldset');
 
   for (var k = 0; k < fieldsets.length; k++) {
@@ -13,7 +12,7 @@
     fieldsets[l].disabled = false;
   }
 
-  window.consts.addressInput.readOnly = true;
+  window.utilConsts.addressInput.readOnly = true;
 
   var roomNumberInput = document.querySelector('#room_number');
   var capacityInput = document.querySelector('#capacity');
@@ -24,9 +23,9 @@
     var capacityValue = +capacityInput.value;
 
     switch (true) {
-      case roomValue === window.consts.ROOMS_COUNT_NOT_GUESTS && capacityValue >= window.consts.ROOMS_MIN && capacityValue <= window.consts.ROOMS_MAX:
+      case roomValue === window.utilConsts.ROOMS_COUNT_NOT_GUESTS && capacityValue >= window.utilConsts.ROOMS_MIN && capacityValue <= window.utilConsts.ROOMS_MAX:
       case roomValue < capacityValue:
-      case roomValue >= window.consts.ROOMS_MIN && roomValue <= window.consts.ROOMS_MAX && capacityValue === 0:
+      case roomValue >= window.utilConsts.ROOMS_MIN && roomValue <= window.utilConsts.ROOMS_MAX && capacityValue === 0:
         validityMessage = '1 комната рассчитана на 1 гостя';
         break;
       default:
@@ -119,7 +118,7 @@
   });
 
   var priceInput = document.querySelector('#price');
-  priceInput.value = window.consts.PRICE_DEFAULT;
+  priceInput.value = window.utilConsts.PRICE_DEFAULT;
 
   var checkValididityPriceInput = function () {
     if (priceInput.value.match(/\D/)) {
@@ -139,16 +138,16 @@
 
     switch (typeHousingInput.value) {
       case 'bungalo':
-        placeholderPrice = window.consts.PRICE_FOR_BUNGALO;
+        placeholderPrice = window.utilConsts.PRICE_FOR_BUNGALO;
         break;
       case 'flat':
-        placeholderPrice = window.consts.PRICE_FOR_FLAT;
+        placeholderPrice = window.utilConsts.PRICE_FOR_FLAT;
         break;
       case 'house':
-        placeholderPrice = window.consts.PRICE_FOR_HOUSE;
+        placeholderPrice = window.utilConsts.PRICE_FOR_HOUSE;
         break;
       case 'palace':
-        placeholderPrice = window.consts.PRICE_FOR_PALACE;
+        placeholderPrice = window.utilConsts.PRICE_FOR_PALACE;
         break;
       default:
         break;

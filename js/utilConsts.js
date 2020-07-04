@@ -33,7 +33,7 @@
   var MAP = document.querySelector('.map');
   var addressInput = document.querySelector('#address');
 
-  window.consts = {
+  window.utilConsts = {
     TYPES: TYPES,
     TIMES: TIMES,
     FEATURES: FEATURES,
