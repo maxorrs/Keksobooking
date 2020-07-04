@@ -7,7 +7,6 @@
     window.form.adForm.classList.remove('ad-form--disabled');
 
     window.pin.pins.appendChild(window.pin.pinsFragment);
-    window.utilConsts.addressInput.value = Math.floor(window.pin.pinMain.offsetLeft + window.utilConsts.MAIN_PIN_WIDTH / 2) + ', ' + Math.floor(window.pin.pinMain.offsetTop + window.utilConsts.MAIN_PIN_HEIGHT);
   };
 
   window.pin.pins.addEventListener('click', function (evt) {

@@ -2,7 +2,6 @@
 
 (function () {
   var adForm = document.querySelector('.ad-form');
-  // adForm.classList.remove('ad-form--disabled');
   var fieldsets = adForm.querySelectorAll('fieldset');
 
   for (var k = 0; k < fieldsets.length; k++) {
