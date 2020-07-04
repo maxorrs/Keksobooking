@@ -42,8 +42,8 @@
       var photo = document.createElement('img');
       photo.className = 'popup__photo';
       photo.src = item.offer.photos[k];
-      photo.width = window.consts.PHOTO_AD_WIDTH;
-      photo.height = window.consts.PHOTO_AD_HEIGHT;
+      photo.width = window.utilConsts.PHOTO_AD_WIDTH;
+      photo.height = window.utilConsts.PHOTO_AD_HEIGHT;
       photo.alt = item.offer.title;
       photos.appendChild(photo);
     }
@@ -63,7 +63,7 @@
     checkingPresenceInCard('.popup__type', getValueTypeOffer(item.offer.type));
 
     if (item.offer.rooms || item.offer.guests) {
-      card.querySelector('.popup__text--capacity').textContent = item.offer.rooms + ' ' + declensionWord(item.offer.rooms, window.consts.DECLENCIONS_ROOMS) + ' для ' + item.offer.guests + ' ' + messageGuest;
+      card.querySelector('.popup__text--capacity').textContent = item.offer.rooms + ' ' + declensionWord(item.offer.rooms, window.utilConsts.DECLENCIONS_ROOMS) + ' для ' + item.offer.guests + ' ' + messageGuest;
     } else {
       card.querySelector('.popup__text--capacity').hidden = true;
     }

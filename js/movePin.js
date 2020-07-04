@@ -4,15 +4,15 @@
   window.pin.pinMain.addEventListener('mousedown', function (evt) {
 
     var coordsMap = {
-      minX: window.consts.MAP.offsetLeft,
-      maxX: window.consts.MAP.offsetLeft + window.consts.MAP.offsetWidth,
+      minX: window.utilConsts.MAP.offsetLeft,
+      maxX: window.utilConsts.MAP.offsetLeft + window.utilConsts.MAP.offsetWidth,
       mapWidthMax: 1200,
       mapWidthMin: 0,
       minY: 130,
       maxY: 630
     };
 
-    if (evt.button === window.consts.LEFT_BUTTON_MOUSE) {
+    if (evt.button === window.utilConsts.LEFT_BUTTON_MOUSE) {
       evt.preventDefault();
 
       var startPosition = {
@@ -42,9 +42,9 @@
         if (startPosition.x >= coordsMap.minX && startPosition.x <= coordsMap.maxX) {
           window.pin.pinMain.style.left = (window.pin.pinMain.offsetLeft - shift.x) + 'px';
         } else if (startPosition.x < coordsMap.minX) {
-          window.pin.pinMain.style.left = coordsMap.mapWidthMin - window.consts.MAIN_PIN_WIDTH / 2 + 'px';
+          window.pin.pinMain.style.left = coordsMap.mapWidthMin - window.utilConsts.MAIN_PIN_WIDTH / 2 + 'px';
         } else if (startPosition.x > coordsMap.maxX) {
-          window.pin.pinMain.style.left = coordsMap.mapWidthMax - window.consts.MAIN_PIN_WIDTH / 2 + 'px';
+          window.pin.pinMain.style.left = coordsMap.mapWidthMax - window.utilConsts.MAIN_PIN_WIDTH / 2 + 'px';
         }
 
         if (startPosition.y >= coordsMap.minY && startPosition.y <= coordsMap.maxY) {

@@ -2,7 +2,7 @@
 
 (function () {
   var creationMock = function (arr) {
-    for (var i = 0; i < window.consts.COUNT_ADS; i++) {
+    for (var i = 0; i < window.utilConsts.COUNT_ADS; i++) {
       arr.push(
           {
             'author': {
@@ -10,20 +10,20 @@
             },
             'offer': {
               'title': 'Заголовок объявления',
-              'address': window.util.getRandomIntInclusive(0, window.consts.MAP.offsetWidth) + ', ' + window.util.getRandomIntInclusive(window.consts.HEIGHT_Y_MIN, window.consts.HEIGHT_Y_MAX),
-              'price': window.util.getRandomIntInclusive(window.consts.PRICE_MIN, window.consts.PRICE_MAX),
-              'type': window.consts.TYPES[window.util.getRandomIntInclusive(0, window.consts.TYPES.length - 1)],
-              'rooms': window.util.getRandomIntInclusive(window.consts.ROOMS_MIN, window.consts.ROOMS_MAX),
-              'guests': window.util.getRandomIntInclusive(window.consts.GUESTS_MIN, window.consts.GUESTS_MAX),
-              'checkin': window.consts.TIMES[window.util.getRandomIntInclusive(0, window.consts.TIMES.length - 1)],
-              'checkout': window.consts.TIMES[window.util.getRandomIntInclusive(0, window.consts.TIMES.length - 1)],
-              'features': window.consts.FEATURES,
+              'address': window.util.getRandomIntInclusive(0, window.utilConsts.MAP.offsetWidth) + ', ' + window.util.getRandomIntInclusive(window.utilConsts.HEIGHT_Y_MIN, window.utilConsts.HEIGHT_Y_MAX),
+              'price': window.util.getRandomIntInclusive(window.utilConsts.PRICE_MIN, window.utilConsts.PRICE_MAX),
+              'type': window.utilConsts.TYPES[window.util.getRandomIntInclusive(0, window.utilConsts.TYPES.length - 1)],
+              'rooms': window.util.getRandomIntInclusive(window.utilConsts.ROOMS_MIN, window.utilConsts.ROOMS_MAX),
+              'guests': window.util.getRandomIntInclusive(window.utilConsts.GUESTS_MIN, window.utilConsts.GUESTS_MAX),
+              'checkin': window.utilConsts.TIMES[window.util.getRandomIntInclusive(0, window.utilConsts.TIMES.length - 1)],
+              'checkout': window.utilConsts.TIMES[window.util.getRandomIntInclusive(0, window.utilConsts.TIMES.length - 1)],
+              'features': window.utilConsts.FEATURES,
               'description': 'Описание объявления',
               'photos': ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg']
             },
             'location': {
-              'x': window.util.getRandomIntInclusive(0, window.consts.MAP.offsetWidth) + window.consts.PIN_WIDTH / 2,
-              'y': window.util.getRandomIntInclusive(window.consts.HEIGHT_Y_MIN, window.consts.HEIGHT_Y_MAX) + window.consts.PIN_HEIGHT
+              'x': window.util.getRandomIntInclusive(0, window.utilConsts.MAP.offsetWidth) + window.utilConsts.PIN_WIDTH / 2,
+              'y': window.util.getRandomIntInclusive(window.utilConsts.HEIGHT_Y_MIN, window.utilConsts.HEIGHT_Y_MAX) + window.utilConsts.PIN_HEIGHT
             }
           }
       );
