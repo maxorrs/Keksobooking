@@ -6,6 +6,10 @@
   var pinTemplate = document.querySelector('#pin').content.querySelector('button');
   var pinsFragment = document.createDocumentFragment();
 
+  // for (var v = 0; v < window.data.mocks.length; v++) {
+  //   pinsFragment.children[v].dataset.id = v;
+  // }
+
   var renderPin = function (item) {
     var pin = pinTemplate.cloneNode(true);
 
@@ -18,18 +22,23 @@
     return pin;
   };
 
-  for (var i = 0; i < window.data.mocks.length; i++) {
-    pinsFragment.appendChild(renderPin(window.data.mocks[i]));
+  var addPin = function (itemData) {
+    pinsFragment.appendChild(renderPin(itemData));
   }
+  
 
-  for (var v = 0; v < window.data.mocks.length; v++) {
-    pinsFragment.children[v].dataset.id = v;
-  }
+  // for (var i = 0; i < window.data.mocks.length; i++) {
+  //   pinsFragment.appendChild(renderPin(window.data.mocks[i]));
+  // }
+
+  
+
 
   window.pin = {
     pins: pins,
     pinsFragment: pinsFragment,
     renderPin: renderPin,
-    pinMain: pinMain
+    pinMain: pinMain,
+    addPin: addPin
   };
 })();
