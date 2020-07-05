@@ -18,18 +18,23 @@
     return pin;
   };
 
-  for (var i = 0; i < window.data.mocks.length; i++) {
-    pinsFragment.appendChild(renderPin(window.data.mocks[i]));
-  }
+  var addPin = function (itemData) {
+    pinsFragment.appendChild(renderPin(itemData));
+  };
 
-  for (var v = 0; v < window.data.mocks.length; v++) {
-    pinsFragment.children[v].dataset.id = v;
-  }
+  var removePin = function () {
+    var pinsForRemove = pins.querySelectorAll('.map__pin:not(.map__pin--main)');
+    for (var i = 0; i < pinsForRemove.length; i++) {
+      pinsForRemove[i].remove();
+    }
+  };
 
   window.pin = {
     pins: pins,
     pinsFragment: pinsFragment,
     renderPin: renderPin,
-    pinMain: pinMain
+    pinMain: pinMain,
+    addPin: addPin,
+    removePin: removePin
   };
 })();

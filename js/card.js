@@ -55,6 +55,7 @@
   };
 
   var renderCard = function (item) {
+
     var messageGuest = item.offer.guests % 10 !== 1 || item.offer.guests === 11 ? ' гостей' : ' гостя';
 
     checkingPresenceInCard('.popup__title', item.offer.title);
