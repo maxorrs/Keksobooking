@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  window.utilConsts.addressInput.value = Math.floor(window.pin.pinMain.offsetLeft + window.utilConsts.MAIN_PIN_CIRCLE / 2) + ', ' + Math.floor(window.pin.pinMain.offsetTop + window.utilConsts.MAIN_PIN_CIRCLE / 2);
   window.form.setDefaultValueSelect();
 
   var successHandler = function (data) {
@@ -23,29 +22,27 @@
     });
   };
 
-  var errorHandler = function (errorMessage) {
-    var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
-
   var isActiveMode = true;
 
   var activeModeOn = function () {
     if (isActiveMode) {
-      window.load(successHandler, errorHandler);
+      window.load(window.utilConsts.URL_GET_DATA, 'GET', successHandler, window.errorHandler.errorHandler);
       window.utilConsts.MAP.classList.remove('map--faded');
       window.form.adForm.classList.remove('ad-form--disabled');
 
       isActiveMode = false;
     }
   };
+
+  window.reset.resetFormBtn.addEventListener('click', function (evt) {
+    window.reset.inactiveMod(evt);
+    isActiveMode = true;
+  });
+
+  window.form.adForm.addEventListener('submit', function (evt) {
+    window.form.submitHandler(evt);
+    isActiveMode = true;
+  });
 
   window.main = {
     activeModeOn: activeModeOn,

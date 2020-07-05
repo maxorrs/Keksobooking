@@ -37,6 +37,7 @@
 
   window.map = {
     onCardEscPress: onCardEscPress,
-    onCardCloseButton: onCardCloseButton
+    onCardCloseButton: onCardCloseButton,
+    closeAdCard: closeAdCard
   };
 })();

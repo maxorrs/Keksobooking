@@ -1,6 +1,8 @@
 'use strict';
 (function () {
 
+  var URL_GET_DATA = 'https://javascript.pages.academy/keksobooking/data';
+  var URL_POST_DATA = 'https://javascript.pages.academy/keksobooking';
   var TYPES = ['palace', 'flat', 'house', 'bungalo'];
   var TIMES = ['12:00', '13:00', '14:00'];
   var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
@@ -9,6 +11,8 @@
   var MAIN_PIN_CIRCLE = 62;
   var MAIN_PIN_WIDTH = 62;
   var MAIN_PIN_HEIGHT = 84;
+  var START_POSITION_MAIN_Y = 570;
+  var START_POSITION_MAIN_X = 375;
   var COUNT_ADS = 8;
   var PRICE_MIN = 1000;
   var PRICE_MAX = 1000000;
@@ -64,6 +68,10 @@
     PRICE_FOR_HOUSE: PRICE_FOR_HOUSE,
     PRICE_FOR_PALACE: PRICE_FOR_PALACE,
     MAP: MAP,
-    addressInput: addressInput
+    addressInput: addressInput,
+    START_POSITION_MAIN_X: START_POSITION_MAIN_X,
+    START_POSITION_MAIN_Y: START_POSITION_MAIN_Y,
+    URL_GET_DATA: URL_GET_DATA,
+    URL_POST_DATA: URL_POST_DATA
   };
 })();

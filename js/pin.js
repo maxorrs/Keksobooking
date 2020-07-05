@@ -22,11 +22,19 @@
     pinsFragment.appendChild(renderPin(itemData));
   };
 
+  var removePin = function () {
+    var pinsForRemove = pins.querySelectorAll('.map__pin:not(.map__pin--main)');
+    for (var i = 0; i < pinsForRemove.length; i++) {
+      pinsForRemove[i].remove();
+    }
+  };
+
   window.pin = {
     pins: pins,
     pinsFragment: pinsFragment,
     renderPin: renderPin,
     pinMain: pinMain,
-    addPin: addPin
+    addPin: addPin,
+    removePin: removePin
   };
 })();
