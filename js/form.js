@@ -45,24 +45,11 @@
     }
     capacityInput.children[2].disabled = false;
     capacityInput.children[2].selected = true;
-
-    adForm.querySelector('#title').value = '';
-    timeIn[0].selected = true;
-    timeOut[0].selected = true;
     typeHousingInput[1].selected = true;
+
     priceInput.value = window.utilConsts.PRICE_DEFAULT;
     priceInput.placeholder = window.utilConsts.PRICE_DEFAULT;
     priceInput.minLength = window.utilConsts.PRICE_DEFAULT.length;
-    adForm.querySelector('#description').value = '';
-    roomNumberInput[0].selected = true;
-    capacityInput[2].selected = true;
-
-    var features = adForm.querySelectorAll('[type="checkbox"]');
-    for (var b = 0; b < features.length; b++) {
-      if (features[b].checked) {
-        features[b].checked = false;
-      }
-    }
 
     window.pin.pinMain.style.left = window.utilConsts.START_POSITION_MAIN_Y + 'px';
     window.pin.pinMain.style.top = window.utilConsts.START_POSITION_MAIN_X + 'px';
@@ -139,11 +126,12 @@
     syncTimesChekInCheckOut();
   });
 
-  priceInput.value = window.utilConsts.PRICE_DEFAULT;
-
   var checkValididityPriceInput = function () {
     if (priceInput.value.match(/\D/)) {
       priceInput.setCustomValidity('Только цифры');
+      priceInput.reportValidity();
+    } else if (priceInput.value > window.utilConsts.PRICE_MAX) {
+      priceInput.setCustomValidity('Максмальная цена за ночь 1 000 000');
       priceInput.reportValidity();
     } else {
       priceInput.setCustomValidity('');
