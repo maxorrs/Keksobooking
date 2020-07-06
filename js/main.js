@@ -35,6 +35,7 @@
   };
 
   window.reset.resetFormBtn.addEventListener('click', function (evt) {
+    evt.preventDefault();
     window.reset.inactiveMod(evt);
     isActiveMode = true;
   });
