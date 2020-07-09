@@ -36,6 +36,7 @@
   var PRICE_FOR_PALACE = 10000;
   var MAP = document.querySelector('.map');
   var addressInput = document.querySelector('#address');
+  var MAX_COUNT_PINS = 5;
 
   window.utilConsts = {
     TYPES: TYPES,
@@ -72,6 +73,7 @@
     START_POSITION_MAIN_X: START_POSITION_MAIN_X,
     START_POSITION_MAIN_Y: START_POSITION_MAIN_Y,
     URL_GET_DATA: URL_GET_DATA,
-    URL_POST_DATA: URL_POST_DATA
+    URL_POST_DATA: URL_POST_DATA,
+    MAX_COUNT_PINS: MAX_COUNT_PINS
   };
 })();

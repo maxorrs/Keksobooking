@@ -10,9 +10,12 @@
   var roomNumberInput = document.querySelector('#room_number');
   var capacityInput = document.querySelector('#capacity');
 
-  for (var k = 0; k < fieldsets.length; k++) {
-    fieldsets[k].disabled = true;
-  }
+
+  var toggleActiveFieldsets = function (bool) {
+    for (var k = 0; k < fieldsets.length; k++) {
+      fieldsets[k].disabled = bool;
+    }
+  };
 
   for (var l = 0; l < fieldsets.length; l++) {
     fieldsets[l].disabled = false;
@@ -40,6 +43,7 @@
   };
 
   var setDefaultValueSelect = function () {
+
     for (var x = 0; x < capacityInput.children.length; x++) {
       capacityInput.children[x].disabled = true;
     }
@@ -247,6 +251,7 @@
   window.form = {
     setDefaultValueSelect: setDefaultValueSelect,
     adForm: adForm,
-    submitHandler: submitHandler
+    submitHandler: submitHandler,
+    toggleActiveFieldsets: toggleActiveFieldsets
   };
 })();
