@@ -1,12 +1,16 @@
 'use strict';
 
 (function () {
+  var originalData = [];
+
   window.form.setDefaultValueSelect();
+  window.form.toggleActiveFieldsets(true);
 
   var successHandler = function (data) {
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < window.utilConsts.MAX_COUNT_PINS; i++) {
       window.pin.addPin(data[i]);
       window.pin.pinsFragment.children[i].dataset.id = i;
+      originalData.push(data[i]);
     }
 
     window.pin.pins.appendChild(window.pin.pinsFragment);
@@ -20,6 +24,10 @@
         document.querySelector('.popup__close').addEventListener('click', window.map.onCardCloseButton);
       }
     });
+
+    window.filter.housingTypeInput.addEventListener('change', function () {
+      window.filter.filteringByHousingType(window.filter.housingTypeInput.value);
+    });
   };
 
   var isActiveMode = true;
@@ -29,6 +37,7 @@
       window.load(window.utilConsts.URL_GET_DATA, 'GET', successHandler, window.errorHandler.errorHandler);
       window.utilConsts.MAP.classList.remove('map--faded');
       window.form.adForm.classList.remove('ad-form--disabled');
+      window.form.toggleActiveFieldsets(false);
 
       isActiveMode = false;
     }
@@ -47,6 +56,7 @@
 
   window.main = {
     activeModeOn: activeModeOn,
-    isActiveMode: isActiveMode
+    isActiveMode: isActiveMode,
+    originalData: originalData
   };
 })();
