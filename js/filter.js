@@ -1,6 +1,19 @@
 'use strict';
 
 (function () {
+  var Price = {
+    middle: {
+      MIN: 10000,
+      MAX: 50000
+    },
+    low: {
+      MAX: 10000
+    },
+    high: {
+      MIN: 5000
+    }
+  };
+
   var formFilters = document.querySelector('.map__filters');
   var featuresSpace = formFilters.querySelector('.map__features');
 
@@ -12,13 +25,13 @@
   var translatePrice = function (price) {
     var result;
     switch (true) {
-      case price >= 10000 && price <= 50000:
+      case price >= Price.middle.MIN && price <= Price.middle.MAX:
         result = 'middle';
         break;
-      case price < 10000:
+      case price < Price.low.MAX:
         result = 'low';
         break;
-      case price > 50000:
+      case price > Price.high.MIN:
         result = 'high';
         break;
     }

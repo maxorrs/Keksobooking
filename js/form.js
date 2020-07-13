@@ -1,6 +1,13 @@
 'use strict';
 
 (function () {
+  var Rooms = {
+    ONE_PERSON: 1,
+    TWO_PERSONS: 2,
+    THREE_PERSONS: 3,
+    HUNDRED_PERSONS: 100
+  };
+
   var adForm = document.querySelector('.ad-form');
   var fieldsets = adForm.querySelectorAll('fieldset');
   var timeIn = document.querySelector('#timein');
@@ -62,26 +69,26 @@
 
   var syncSelects = function () {
     for (var z = 0; z < capacityInput.children.length; z++) {
-      switch (roomNumberInput.value) {
-        case '1':
+      switch (+roomNumberInput.value) {
+        case Rooms.ONE_PERSON:
           capacityInput.children[z].disabled = true;
           capacityInput.children[2].disabled = false;
           capacityInput.children[2].selected = true;
           break;
-        case '2':
+        case Rooms.TWO_PERSONS:
           capacityInput.children[z].disabled = true;
           capacityInput.children[1].disabled = false;
           capacityInput.children[2].disabled = false;
           capacityInput.children[2].selected = true;
           break;
-        case '3':
+        case Rooms.THREE_PERSONS:
           capacityInput.children[z].disabled = true;
           capacityInput.children[2].disabled = false;
           capacityInput.children[1].disabled = false;
           capacityInput.children[0].disabled = false;
           capacityInput.children[2].selected = true;
           break;
-        case '100':
+        case Rooms.HUNDRED_PERSONS:
           capacityInput.children[z].disabled = true;
           capacityInput.children[3].disabled = false;
           capacityInput.children[3].selected = true;

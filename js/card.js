@@ -49,11 +49,6 @@
     }
   };
 
-  var declensionWord = function (number, word) {
-    var cases = [2, 0, 1, 1, 1, 2];
-    return word[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
-  };
-
   var renderCard = function (item) {
 
     var messageGuest = item.offer.guests % 10 !== 1 || item.offer.guests === 11 ? ' гостей' : ' гостя';
@@ -64,7 +59,7 @@
     checkingPresenceInCard('.popup__type', getValueTypeOffer(item.offer.type));
 
     if (item.offer.rooms || item.offer.guests) {
-      card.querySelector('.popup__text--capacity').textContent = item.offer.rooms + ' ' + declensionWord(item.offer.rooms, window.utilConsts.DECLENCIONS_ROOMS) + ' для ' + item.offer.guests + ' ' + messageGuest;
+      card.querySelector('.popup__text--capacity').textContent = item.offer.rooms + ' ' + window.util.declensionWord(item.offer.rooms, window.utilConsts.DECLENCIONS_ROOMS) + ' для ' + item.offer.guests + ' ' + messageGuest;
     } else {
       card.querySelector('.popup__text--capacity').hidden = true;
     }
