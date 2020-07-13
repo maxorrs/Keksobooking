@@ -16,8 +16,10 @@
 
   var closeAdCard = function () {
     if (document.querySelector('.map__card')) {
+      window.pin.removeActiveClassFromPins();
       document.querySelector('.map__card').remove();
       document.removeEventListener('keydown', onCardEscPress);
+
       if (document.querySelector('.popup__close')) {
         document.querySelector('.popup__close').removeEventListener('click', onCardCloseButton);
       }
