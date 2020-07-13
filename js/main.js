@@ -62,6 +62,11 @@
     isActiveMode = true;
   });
 
+
+  window.uploadPhoto.setPhoto(window.form.fileChooserAvatar, window.form.previewAvatar);
+  window.uploadPhoto.setPhoto(window.form.fileChooserPhotoAd, window.form.previewPhotoAd);
+
+
   window.main = {
     activeModeOn: activeModeOn,
     isActiveMode: isActiveMode,

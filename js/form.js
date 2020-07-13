@@ -255,10 +255,30 @@
     window.load(window.utilConsts.URL_POST_DATA, 'POST', successFormHandler, errorFormHandler, new FormData(adForm));
   };
 
+  var fileChooserAvatar = document.querySelector('.ad-form-header__input');
+  var previewAvatar = document.querySelector('.ad-form-header__preview img');
+
+  var fileChooserPhotoAd = document.querySelector('.ad-form__input');
+  var photoAd = document.querySelector('.ad-form__photo');
+  var imgForPhotoAd = document.createElement('img');
+
+  imgForPhotoAd.width = '40';
+  imgForPhotoAd.height = '44';
+  imgForPhotoAd.src = 'img/muffin-grey.svg';
+  photoAd.style = 'display: flex; align-items: center; justify-content: center';
+  imgForPhotoAd.alt = 'Фотография объявления';
+  photoAd.appendChild(imgForPhotoAd);
+
+  var previewPhotoAd = document.querySelector('.ad-form__photo img');
+
   window.form = {
     setDefaultValueSelect: setDefaultValueSelect,
     adForm: adForm,
     submitHandler: submitHandler,
-    toggleActiveFieldsets: toggleActiveFieldsets
+    toggleActiveFieldsets: toggleActiveFieldsets,
+    fileChooserPhotoAd: fileChooserPhotoAd,
+    previewPhotoAd: previewPhotoAd,
+    fileChooserAvatar: fileChooserAvatar,
+    previewAvatar: previewAvatar
   };
 })();
