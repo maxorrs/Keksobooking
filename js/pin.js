@@ -7,14 +7,15 @@
   var pinsFragment = document.createDocumentFragment();
 
   var renderPin = function (item) {
-    var pin = pinTemplate.cloneNode(true);
+    if (item.offer) {
+      var pin = pinTemplate.cloneNode(true);
 
-    pin.style.left = item.location.x + 'px';
-    pin.style.top = item.location.y + 'px';
+      pin.style.left = item.location.x + 'px';
+      pin.style.top = item.location.y + 'px';
 
-    pin.querySelector('img').src = item.author.avatar;
-    pin.querySelector('img').alt = item.offer.title;
-
+      pin.querySelector('img').src = item.author.avatar;
+      pin.querySelector('img').alt = item.offer.title;
+    }
     return pin;
   };
 
@@ -23,9 +24,16 @@
   };
 
   var removePin = function () {
-    var pinsForRemove = pins.querySelectorAll('.map__pin:not(.map__pin--main)');
-    for (var i = 0; i < pinsForRemove.length; i++) {
-      pinsForRemove[i].remove();
+    var pinsInMap = pins.querySelectorAll('.map__pin:not(.map__pin--main)');
+
+    for (var i = 0; i < pinsInMap.length; i++) {
+      pinsInMap[i].remove();
+    }
+  };
+
+  var removeActiveClassFromPins = function () {
+    for (var pin = 0; pin < pins.length; pin++) {
+      pins[pin].classList.remove('map__pin--active');
     }
   };
 
@@ -35,6 +43,7 @@
     renderPin: renderPin,
     pinMain: pinMain,
     addPin: addPin,
-    removePin: removePin
+    removePin: removePin,
+    removeActiveClassFromPins: removeActiveClassFromPins
   };
 })();

@@ -53,7 +53,7 @@
 
     priceInput.value = window.utilConsts.PRICE_DEFAULT;
     priceInput.placeholder = window.utilConsts.PRICE_DEFAULT;
-    priceInput.minLength = window.utilConsts.PRICE_DEFAULT.length;
+    priceInput.minLength = window.utilConsts.MIN_LENGTH_PRICE_DEFAULT;
 
     window.pin.pinMain.style.left = window.utilConsts.START_POSITION_MAIN_Y + 'px';
     window.pin.pinMain.style.top = window.utilConsts.START_POSITION_MAIN_X + 'px';

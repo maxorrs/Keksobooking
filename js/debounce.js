@@ -1,19 +1,18 @@
 'use strict';
 
 (function () {
-  var DEBOUNCE_INTERVAL = 300;
+  var DEBOUNCE_INTERVAL = 500;
+  var lastTimeoutId = 0;
 
-  window.debounce = function (cb) {
-    var lastTimeout = null;
+  var debounce = function (onTimeout) {
+    if (lastTimeoutId > 0) {
+      window.clearTimeout(lastTimeoutId);
+    }
 
-    return function () {
-      var parameters = arguments;
-      if (lastTimeout) {
-        window.clearTimeout(lastTimeout);
-      }
-      lastTimeout = window.setTimeout(function () {
-        cb.apply(null, parameters);
-      }, DEBOUNCE_INTERVAL);
-    };
+    lastTimeoutId = window.setTimeout(function () {
+      onTimeout();
+    }, DEBOUNCE_INTERVAL);
   };
+
+  window.debounce = debounce;
 })();
