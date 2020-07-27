@@ -9,3 +9,5 @@
 * Модули (IIFE)
 * AJAX
 * Управление формами и их валидация
+
+[Сертификат](https://assets.htmlacademy.ru/certificates/intensive/167/1328569.pdf?1594669275)
